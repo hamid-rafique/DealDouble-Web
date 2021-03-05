@@ -1,31 +1,57 @@
 ﻿@model DealDouble.Entities.Auction
 <h2>Edit</h2>
-<form method="post">
-    <input type="hidden" name="ID" value="@Model.ID" />
-    <label>Title</label>
-    <input name="Title" value="@Model.Title" />
-    <br />
-    <label>Description</label>
-    <input name="Description" value="@Model.Description" />
-    <br />
+<form method="post" id="edit-form">
+    <div class="row">
 
-    <label>
-        Actual Amount
-    </label>
-    <input name="ActualAmount" value="@Model.ActualAmount" />
-    <br />
+        <input type="hidden" name="ID" value="@Model.ID" />
+      
+        <div class="form-group col-md-6">
+            <label>Title</label>
+            <input class="form-control" name="Title" value="@Model.Title" />
+        </div>
 
-    <label>
-        Starting Time
-    </label>
-    <input name="StartingTime" value="@Model.StartingTime" />
-    <br />
+        <div class="form-group col-md-6">
+            <label>Description</label>
+            <input name="Description" class="form-control" value="@Model.Description" />
+        </div>
 
-    <label>
-        Ending Time
-    </label>
-    <input name="EndingTime" value="@Model.EndingTime" />
-    <br />
+            <div class="form-group col-md-6">
+                <label>
+                    Actual Amount
+                </label>
+                <input class="form-control" name="ActualAmount" value="@Model.ActualAmount" />
+            </div>
 
-    <button>Submit</button>
+            <div class="form-group col-md-6">
+                <label>
+                    Starting Time
+                </label>
+                <input class="form-control" name="StartingTime" value="@Model.StartingTime" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>
+                    Ending Time
+                </label>
+                <input class="form-control" name="EndingTime" value="@Model.EndingTime" />
+              </div>
+        <div class="col-md-12">
+                <button class="btn btn-primary" type="button" id="save-edit">Submit</button>
+            </div>
+                    </div>
+
 </form>
+<script>
+    $("#save-edit").click(function () {
+        $.ajax({
+            url: "Auctions/Edit/",
+            method: "post",
+            data: $("#edit-form").serialize()
+        }).done(function (response) {
+            debugger;
+            console.log(response);
+            $("#listing-area").html(response);
+            });
+
+    });
+</script>

@@ -12,49 +12,51 @@ namespace DealDouble.Web.Controllers
     {
         [HttpGet]
         public ActionResult Index()
+
         {
             AuctionsService auctionsService = new AuctionsService();
             var auctions = auctionsService.GetAllAuctions();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView(auctions);
+            }
+            else
             return View(auctions);
         }
-      [HttpGet]
+        [HttpGet]
         public ActionResult Create()
+
         {
-            return View();
+            return PartialView();
         }
         [HttpPost]
         public ActionResult Create(Auction auction)
         {
             AuctionsService auctionsService = new AuctionsService();
             auctionsService.SaveAuction(auction);
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public ActionResult Edit(int ID)
         {
             AuctionsService auctionsService = new AuctionsService();
             var auction = auctionsService.GetAuctionByID(ID);
-            return View(auction);
+            return PartialView(auction);
         }
         [HttpPost]
         public ActionResult Edit(Auction auction)
         {
             AuctionsService auctionsService = new AuctionsService();
             auctionsService.UpdateAuction(auction);
-            return RedirectToRoute(new { controller = "Auctions", action = "Index" });
+            return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult Delete(Auction auction, int option)
+        public ActionResult Delete(Auction auction)
         {
-            if (option == 1)
-            {
+       
                 AuctionsService auctionsService = new AuctionsService();
                 auctionsService.DeleteAuction(auction);
                 return RedirectToAction("Index");
-            }
-            else
-            return RedirectToAction("Index");
-
         }
         [HttpGet]
         public ActionResult Delete(int ID)
