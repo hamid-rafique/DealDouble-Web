@@ -1,0 +1,13 @@
+﻿@model DealDouble.Entities.Auction
+<h2>Are you sure you want to delete this option</h2>
+
+<form method="post">
+    <input name="ID" type="hidden" value="@Model.ID" />
+    <button value="1" name="option">
+        Yes
+    </button>
+    <button value="0" name="option">
+        No
+    </button>
+</form>
+
