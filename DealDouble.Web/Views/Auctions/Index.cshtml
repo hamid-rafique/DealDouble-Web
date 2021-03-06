@@ -1,10 +1,19 @@
 ﻿@model List<DealDouble.Entities.Auction>
 
+<style>
+   
+
+    
+</style>
+
 <div class="row">
     <div id="listing-area" class="col-lg-12">
-        <br />
-        <br />
-        <h2>All Auctions Currently in Progress</h2>
+        
+        <div class="jumbotron">
+            <h1 p-2>Auctions In Progress</h1>
+            
+        </div>
+       
         <div>
             <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success float-right mb-2" id="create-button">Create New Auction</button>
         </div>
@@ -79,6 +88,12 @@
 
         </div>
         <script>
+
+            //document.querySelector("#create-button").addEventListener('click', function () {
+
+            //    document.querySelector("body").style.overflow = 'hidden';
+            //});
+
             $("#create-button").click(function () {
                 $.ajax({
                     url: "Auctions/Create",
@@ -113,7 +128,7 @@
                         }
                     }).done(function (response) {
                         debugger;
-                       
+
                         $("#listing-area").html(response);
                     });
                 }
@@ -123,7 +138,7 @@
             });
         </script>
     </div>
-                </div>
+</div>
 
 
 

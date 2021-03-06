@@ -1,5 +1,4 @@
 ﻿
-
 <form method="post" action="Auctions/Create/" id="create-form">
     <div class="row">
 
@@ -43,18 +42,25 @@
 </form>
 
 <script>
+    document.querySelector("#saveButton").addEventListener('click', function () {
+       
+        document.querySelector("body").style.overflow = 'visible';
+    });
     $("#saveButton").click(function () {
         $.ajax({
             url: "Auctions/Create/",
             method: "post",
-            data: $("#create-form").serialize()
-        }).done(function (response) {
-            debugger;
-         //   $('#exampleModal').modal('hide');
-            $("#listing-area").html(response);
-            location.reload();  
-            $('.modal-backdrop').remove();
-
-        });
+            data: $("#create-form").serialize(),
+            success: function (data) {
+                RefreshMode = true;
+                //learInterval(Continued);
+                $("#listing-area").html(data);
+                $("#exampleModal").modal("hide");
+                $('.modal-backdrop').remove();
+            },
+        })
+            
+        
     });
 </script>
+
